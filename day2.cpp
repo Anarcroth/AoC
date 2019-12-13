@@ -27,6 +27,11 @@ int main()
     seq[1] = 12;
     seq[2] = 2;
 
+    // part 2 solution is
+    // seq[1] = 62;
+    // seq[2] = 55;
+    // 100 * 62 + 55
+
     for (size_t i = 0; i < seq.size(); i += 4)
     {
 	if (seq[i] == 1)
@@ -47,10 +52,7 @@ int main()
 	}
     }
 
-    for (int i : seq) {
-	std::cout << i << std::endl;
-    }
-    std::cout << "first " << seq[0] << std::endl;
+    std::cout << seq[0] << std::endl;
 
     return 0;
 }
