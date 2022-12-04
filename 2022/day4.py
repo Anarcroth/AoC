@@ -89,3 +89,49 @@ with open('day4.txt') as f:
             full_contains += 1
 
 print(f'Part 1: {full_contains}')
+
+"""
+--- Part Two ---
+
+It seems like there is still quite a bit of duplicate work planned. Instead, the Elves would like to know the number of pairs that overlap at all.
+
+In the above example, the first two pairs (2-4,6-8 and 2-3,4-5) don't overlap, while the remaining four pairs (5-7,7-9, 2-8,3-7, 6-6,4-6, and 2-6,4-8) do overlap:
+
+    5-7,7-9 overlaps in a single section, 7.
+    2-8,3-7 overlaps all of the sections 3 through 7.
+    6-6,4-6 overlaps in a single section, 6.
+    2-6,4-8 overlaps in sections 4, 5, and 6.
+
+So, in this example, the number of overlapping assignment pairs is 4.
+
+In how many assignment pairs do the ranges overlap?
+"""
+
+
+def range_overlap2(range1, range2):
+    """Whether range1 and range2 overlap."""
+    x1, x2 = range1.start, range1.stop
+    y1, y2 = range2.start, range2.stop
+
+    a = x1 <= y2
+    b = y1 <= x2
+
+    return a and b
+
+
+with open('day4.txt') as f:
+    elf_sections = f.read().splitlines()
+    full_contains = 0
+    for sect in elf_sections:
+        two_sections = sect.split(',')
+        elf1, elf2 = two_sections[0], two_sections[1]
+
+        range1_s, range1_e = int(elf1.split('-')[0]), int(elf1.split('-')[1])
+        range2_s, range2_e = int(elf2.split('-')[0]), int(elf2.split('-')[1])
+        r1 = range(range1_s, range1_e)
+        r2 = range(range2_s, range2_e)
+
+        if range_overlap2(r1, r2):
+            full_contains += 1
+
+print(f'Part 2: {full_contains}')
